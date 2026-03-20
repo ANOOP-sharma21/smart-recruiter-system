@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Recruiter Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+  background: linear-gradient(135deg,#1d2671,#c33764);
+  color:white;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 30px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+}
+
+.cards{display:flex;gap:20px;padding:20px;}
+.card{
+  flex:1;
+  background: rgba(255,255,255,0.15);
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+}
+
+.form,.search{
+  padding:20px;
+  display:flex;
+  gap:10px;
+}
+
+input{
+  flex:1;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+}
+
+.selection{
+  background:#00c6ff;
+  border:none;
+  padding:10px;
+  border-radius:8px;
+  color:white;
+  cursor:pointer;
+}
+
+table{
+  width:95%;
+  margin:20px auto;
+  background:white;
+  color:black;
+  border-radius:10px;
+  border-collapse:collapse;
+}
+
+th{
+  background:#0072ff;
+  color:white;
+}
+
+th,td{
+  padding:12px;
+  text-align:center;
+}
+
+/* SKILL TAG */
+.skill-tag{
+  display:inline-block;
+  background:#0072ff;
+  color:white;
+  padding:4px 8px;
+  border-radius:10px;
+  margin:2px;
+  font-size:12px;
+}
+
+/* BUTTONS */
+.btn{
+  padding:6px 10px;
+  margin:2px;
+  border:none;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+}
+
+/* STATUS COLORS */
+.pending{background:#ffab00;}
+.select{background:#00c853;}
+.reject{background:#ff3d00;}
+.delete{background:#444;}
+
+/* GRAPH */
+.chart-box{
+  width:60%;
+  height:250px;
+  margin:30px auto;
+  background:white;
+  padding:15px;
+  border-radius:12px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Smart Recruiter</h2>
+</header>
+
+<section class="cards">
+<div class="card">Total <h2 id="total">0</h2></div>
+<div class="card">Top <h2 id="top">0%</h2></div>
+<div class="card">Avg <h2 id="avg">0%</h2></div>
+</section>
+
+<section class="form">
+<input type="text" id="name" placeholder="Candidate Name">
+<input type="text" id="skills" placeholder="Skills (HTML, CSS, JS, Python...)">
+<button onclick="addCandidate()" class="selection">Add</button>
+</section>
+
+<section class="search">
+<input type="text" id="search" placeholder="Search..." onkeyup="render()">
+</section>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Skills</th>
+<th>Match</th>
+<th>Status</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+
+<!-- GRAPH BELOW TABLE -->
+<div class="chart-box">
+<canvas id="myChart" height="200"></canvas>
+</div>
+
+<script>
+let requiredSkills = [
+  "HTML","CSS","JS","PYTHON","JAVA","C","C++",
+  "REACT","NODE","SQL","MONGODB"
+];
+
+let chart;
+
+// DATABASE
+function getDB(){
+  return JSON.parse(localStorage.getItem("candidates")) || [];
+}
+
+function saveDB(data){
+  localStorage.setItem("candidates", JSON.stringify(data));
+}
+
+// MATCH
+function calculateMatch(skills){
+  let matched = skills.filter(s =>
+    requiredSkills.includes(s.toUpperCase())
+  ).length;
+  return Math.round((matched / requiredSkills.length) * 100);
+}
+
+// ADD
+function addCandidate(){
+  let name = document.getElementById("name").value;
+  let skills = document.getElementById("skills").value
+                .split(",")
+                .map(s => s.trim().toUpperCase());
+
+  if(!name || skills.length === 0){
+    alert("Enter valid data");
+    return;
+  }
+
+  let db = getDB();
+
+  db.push({
+    id: Date.now(),
+    name,
+    skills,
+    match: calculateMatch(skills),
+    status: "Pending"
+  });
+
+  saveDB(db);
+
+  document.getElementById("name").value="";
+  document.getElementById("skills").value="";
+
+  render();
+}
+
+// TOGGLE STATUS (Pending ↔ Selected)
+function toggleStatus(id){
+  let db = getDB();
+
+  db = db.map(c => {
+    if(c.id === id){
+      if(c.status === "Pending"){
+        c.status = "Selected";
+      } else if(c.status === "Selected"){
+        c.status = "Pending";
+      }
+    }
+    return c;
+  });
+
+  saveDB(db);
+  render();
+}
+
+// REJECT
+function updateStatus(id, status){
+  let db = getDB();
+  db = db.map(c => {
+    if(c.id === id) c.status = status;
+    return c;
+  });
+  saveDB(db);
+  render();
+}
+
+// DELETE
+function deleteCandidate(id){
+  let db = getDB().filter(c => c.id !== id);
+  saveDB(db);
+  render();
+}
+
+// GRAPH
+function updateChart(data){
+  let names = data.map(c => c.name);
+  let matches = data.map(c => c.match);
+
+  if(chart) chart.destroy();
+
+  chart = new Chart(document.getElementById("myChart"), {
+    type:"line",
+    data:{
+      labels:names,
+      datasets:[{
+        label:"Match %",
+        data:matches,
+        tension:0.4
+      }]
+    },
+    options:{
+      responsive:true,
+      scales:{
+        y:{beginAtZero:true,max:100}
+      }
+    }
+  });
+}
+
+// RENDER
+function render(){
+  let db = getDB();
+  let search = document.getElementById("search").value.toLowerCase();
+  let table = document.getElementById("tableBody");
+
+  table.innerHTML="";
+
+  db.filter(c => c.name.toLowerCase().includes(search))
+  .forEach(c => {
+
+    let skillHTML = c.skills.map(s =>
+      `<span class="skill-tag">${s}</span>`
+    ).join("");
+
+    table.innerHTML += `
+    <tr>
+      <td>${c.name}</td>
+      <td>${skillHTML}</td>
+      <td>${c.match}%</td>
+      <td>
+        <button class="btn ${c.status === 'Selected' ? 'select' : 'pending'}"
+          onclick="toggleStatus(${c.id})">
+          ${c.status}
+        </button>
+      </td>
+      <td>
+        <button class="btn reject" onclick="updateStatus(${c.id}, 'Rejected')">Reject</button>
+        <button class="btn delete" onclick="deleteCandidate(${c.id})">Delete</button>
+      </td>
+    </tr>`;
+  });
+
+  document.getElementById("total").innerText = db.length;
+
+  let top = Math.max(0,...db.map(c=>c.match));
+  document.getElementById("top").innerText = top+"%";
+
+  let avg = db.length 
+    ? Math.round(db.reduce((a,b)=>a+b.match,0)/db.length)
+    : 0;
+
+  document.getElementById("avg").innerText = avg+"%";
+
+  updateChart(db);
+}
+
+render();
+</script>
+
+</body>
+</html>

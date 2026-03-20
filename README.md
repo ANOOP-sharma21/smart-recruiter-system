@@ -60,14 +60,3 @@ Smart Recruiter System automates the hiring process by:
 
 🚧 Currently in development (Hackathon Build)
 
----
-
-## 🤝 Contributing
-
-Feel free to fork and contribute!
-
----
-
-## ⭐ Show Your Support
-
-If you like this project, give it a star ⭐

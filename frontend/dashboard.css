@@ -1,0 +1,93 @@
+body {
+  font-family: Raleway, Mulish, IBM Plex Sans, Roboto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: #f4f7fb;
+}
+
+header {
+  background: #1e3c72;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logout {
+  background: orange;
+  border: none;
+  padding: 0 25px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+}
+.logout span {
+    font-size: 18px;
+}
+.cards {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+}
+
+.card {
+  flex: 1;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.form, .search {
+  padding: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  padding: 8px;
+  flex: 1;
+}
+
+.selection {
+  padding: 8px;
+  background: blue;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+table {
+  width: 95%;
+  margin: auto;
+  background: white;
+  border-collapse: collapse;
+  border-radius: 10px;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 5px;
+}
+
+.green { background: green; }
+.yellow { background: orange; }
+.red { background: red; }
+
+.btn {
+  padding: 5px 8px;
+  margin: 2px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.shortlist { background: green; }
+.reject { background: red; }
+.view { background: blue; }

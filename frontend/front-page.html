@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Recruiter System</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --gradient: linear-gradient(135deg, #06b6d4, #6366f1, #a88aef);
+            --glass: rgba(255, 255, 255, 0.15);
+        }
+
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(transition-fast) 0.2s ease;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: white;
+        }
+
+        li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            position: sticky;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #4444ab30;
+            height: 70px;
+            background: linear-gradient(to bottom,
+                    rgba(44, 91, 203, 0.9),
+                    rgba(105, 136, 206, 0.3),
+                    transparent);
+            backdrop-filter: blur(16px);
+            z-index: 1000;
+
+
+
+        }
+
+        .nav-bar a {
+            position: relative;
+            color: var(--text-muted);
+            padding-bottom: 3px;
+            transition: color var(--transition-fast);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            margin-right: 230px;
+        }
+
+        .form {
+            display: flex;
+            align-items: center;
+            margin-right: 60px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #d06f08;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 30px;
+            margin-left: 10px;
+        }
+
+        .nav-bar a:hover {
+            color: #ed1010;
+        }
+
+
+        .home-page {
+            background: url("https://media.istockphoto.com/id/923313924/vector/blue-background-turquoise-background.jpg?s=612x612&w=0&k=20&c=oivpuqYcnIOtwn76h9Jl3TNqDvgj4JxizuWiH2XaqQM=");
+            background-size: cover;
+            background-position: center;
+            height: 780px;
+        }
+
+        .home-content {
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: white;
+            text-align: center;
+        }
+
+        .left-section {
+            width: 50%;
+            height: 100%;
+
+            align-content: center;
+        }
+
+        .right-section {
+            width: 50%;
+            height: 100%;
+
+            align-content: center;
+        }
+
+        .hero {
+
+            align-items: center;
+            justify-content: space-between;
+            padding: 100px 60px;
+            align-content: center;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            margin: 20px 0;
+            font-size: 18px;
+            color: white;
+        }
+
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 30px;
+            background: var(--gradient);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .right-section img {
+            width: auto;
+            height: 100%;
+            margin-top: 30px;
+        }
+
+        .about {
+            background: url("https://media.istockphoto.com/id/923313924/vector/blue-background-turquoise-background.jpg?s=612x612&w=0&k=20&c=oivpuqYcnIOtwn76h9Jl3TNqDvgj4JxizuWiH2XaqQM=");
+            background-size: cover;
+            background-position: center;
+            height: 780px;
+        }
+
+        .about-box {
+            width: 80%;
+            height: 600px;
+            background: rgba(244, 241, 241, 0.664);
+            backdrop-filter: blur(16px);
+            margin: 100px auto;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            padding-left: 50px;
+
+            margin-top: 0px;
+
+
+
+        }
+
+        .nothing {
+            height: 100px;
+        }
+
+        .about-box h2.an {
+            font-size: 40px;
+            margin-top: 15px;
+            font-size: 50px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .about-box h1 {
+            font-family: 'Euclid Square', sans-serif;
+            font-size: 64px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin: 0 0 20px 0;
+            color: var(--w-primary-800);
+        }
+
+        .about-box h1 strong {
+
+            font-weight: 700;
+            font-style: italic;
+            color: var(--w-primary-300);
+            color: green;
+        }
+
+
+        .about-box h2 b {
+            font-family: 'Inter Bold', sans-serif;
+            font-weight: 700;
+        }
+
+        .about-box h2 {
+            font-family: 'Inter Regular', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 2rem 0;
+        }
+        .about-flex {
+            display: flex;
+           
+        }
+        .about-flex .left-section {
+            width: 50%;
+            padding-right: 20px;
+        }
+        .about-flex .right-section {
+            width: 50%;
+            padding-right: 40px;
+        }
+        .about-flex .right-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="home-page" id="home-page">
+        <div class="nav-bar">
+            <div class="logo">Smart Recruiter System<span>.</span></div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#home-page">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#education">How It Works</a></li>
+                    <li><a href="#skills">For Employers</a></li>
+                    <li><a href="#projects">Projects</a></li>
+
+
+
+
+                </ul>
+            </nav>
+            <span class="form">
+                <form action="post">
+                    <button type="submit" class="login-btn">Login</button>
+                    <button type="submit" class="signup-btn">Sign Up</button>
+                </form>
+            </span>
+
+
+        </div>
+        <div class="home-content">
+            <section class="left-section">
+                <div class="hero">
+                    <h1>Hire Smarter with AI</h1>
+                    <p>Modern recruitment system with automation & intelligence.</p>
+                    <button class="btn">Upload Your Detail</button>
+                    <button class="btn">Find Candidate</button>
+                </div>
+            </section>
+            <section class="right-section">
+                <img src="download.png" alt="">
+            </section>
+
+        </div>
+    </div>
+    <div class="about" id="about">
+        <div class="nothing"></div>
+        <div class="about-box">
+            <center>
+                <h2 class="an">About Us</h2>
+            </center><br>
+            <div class="about-flex">
+                <div class="left-section">
+                    <h1 class="h3">Make hiring <strong>easy</strong></h1><br>
+                    <h2><b>Hiring should be simple.</b><br>
+                        Our simple goal is to help businesses get the talent they need to succeed. And to help people
+                        find a
+                        job they love
+                    </h2>
+                </div>
+                <div class="right-section">
+                    <img src="about.png" alt="About Us">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

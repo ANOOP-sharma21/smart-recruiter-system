@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Recruiter Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+  background: linear-gradient(135deg,#1d2671,#c33764);
+  color:white;
+}
+
+/* HEADER */
+header{
+  padding:15px 30px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+}
+
+/* CARDS */
+.cards{
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  flex:1;
+  background: rgba(255,255,255,0.15);
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+}
+
+/* TABLE */
+table{
+  width:95%;
+  margin:20px auto;
+  background:white;
+  color:black;
+  border-radius:10px;
+  border-collapse:collapse;
+  overflow:hidden;
+}
+
+th{
+  background:#0072ff;
+  color:white;
+}
+
+th,td{
+  padding:12px;
+  text-align:center;
+}
+
+.skill-tag{
+  background:#0072ff;
+  color:white;
+  padding:4px 8px;
+  border-radius:10px;
+  margin:2px;
+  display:inline-block;
+}
+
+/* BUTTONS */
+.btn{
+  padding:6px 10px;
+  border:none;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{transform:scale(1.05);}
+
+.select{background:#00c853;}
+.reject{background:#ff3d00;}
+.delete{background:#444;}
+.view{background:#0072ff;}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>Smart Recruiter Dashboard</h2>
+</header>
+
+<!-- CARDS -->
+<section class="cards">
+<div class="card">Total <h2 id="total">0</h2></div>
+<div class="card">Selected <h2 id="selected">0</h2></div>
+<div class="card">Rejected <h2 id="rejected">0</h2></div>
+</section>
+
+<!-- TABLE -->
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Skills</th>
+<th>Experience</th>
+<th>Education</th>
+<th>Resume</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+</table>
+
+<script>
+
+// DATABASE
+function getDB(){
+  return JSON.parse(localStorage.getItem("candidates")) || [];
+}
+
+function saveDB(data){
+  localStorage.setItem("candidates", JSON.stringify(data));
+}
+
+// 📧 SELECTION EMAIL
+function sendSelectionMail(email, name){
+let subject = "Job Selection Confirmation";
+
+let body = `Dear ${name},
+
+Congratulations! 🎉
+
+You have been selected for the job.
+
+Our HR team will contact you soon.
+
+Regards,
+HR Team`;
+
+window.location.href =
+`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// 📧 REJECTION EMAIL
+function sendRejectionMail(email, name){
+let subject = "Application Status Update";
+
+let body = `Dear ${name},
+
+Thank you for applying to our company.
+
+We regret to inform you that you have not been selected for this position.
+
+We wish you all the best for your future.
+
+Regards,
+HR Team`;
+
+window.location.href =
+`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// SELECT
+function selectCandidate(id){
+let db = getDB().map(c=>{
+  if(c.id === id){
+    c.status = "Selected";
+    sendSelectionMail(c.email, c.name);
+  }
+  return c;
+});
+
+saveDB(db);
+render();
+}
+
+// REJECT
+function rejectCandidate(id){
+let db = getDB().map(c=>{
+  if(c.id === id){
+    c.status = "Rejected";
+    sendRejectionMail(c.email, c.name);
+  }
+  return c;
+});
+
+saveDB(db);
+render();
+}
+
+// DELETE
+function deleteCandidate(id){
+let db = getDB().filter(c=>c.id !== id);
+saveDB(db);
+render();
+}
+
+// RENDER
+function render(){
+
+let db = getDB();
+let table = document.getElementById("tableBody");
+
+table.innerHTML = "";
+
+let selected = 0;
+let rejected = 0;
+
+db.forEach(c=>{
+
+if(c.status==="Selected") selected++;
+if(c.status==="Rejected") rejected++;
+
+let skills = c.skills.map(s=>`<span class="skill-tag">${s}</span>`).join("");
+
+table.innerHTML += `
+<tr>
+<td>${c.name}</td>
+<td>${c.email}</td>
+<td>${c.phone}</td>
+<td>${skills}</td>
+<td>${c.experience} yrs</td>
+<td>${c.education}</td>
+<td><a href="${c.resume}" target="_blank" class="btn view">View</a></td>
+<td>${c.status}</td>
+
+<td>
+<button class="btn select" onclick="selectCandidate(${c.id})">Select</button>
+<button class="btn reject" onclick="rejectCandidate(${c.id})">Reject</button>
+<button class="btn delete" onclick="deleteCandidate(${c.id})">Delete</button>
+</td>
+</tr>
+`;
+});
+
+// UPDATE CARDS
+document.getElementById("total").innerText = db.length;
+document.getElementById("selected").innerText = selected;
+document.getElementById("rejected").innerText = rejected;
+
+}
+
+// LOAD
+render();
+
+</script>
+
+</body>
+</html>

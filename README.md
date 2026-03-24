@@ -23,20 +23,18 @@ smart-recruiter-backend → Backend + Database
 
 1. Clone repo
 git clone https://github.com/ANOOP-sharma21/smart-recruiter-system
-
-
 git checkout fullstack-demo
 
-3. Go to backend
+2. Go to backend
 cd smart-recruiter-system/smart-recruiter-backend
 
-4. Install dependencies using this command in the command shell of your vs code or project folder : 
+3. Install dependencies using this command in the command shell of your vs code or project folder : 
 npm install
 
-5. Run backend using the command  INSIDE your backend folder:
+4. Run backend using the command  INSIDE your backend folder:
 node server.js
 
-6. Open frontend :
+5. Open frontend :
 
 Go back and open:
 frontend/index.html

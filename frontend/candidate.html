@@ -2,291 +2,390 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Recruiter - Candidate Form</title>
+<title>Dashboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-<script src="https://kit.fontawesome.com/a2d9d6cfd3.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background: linear-gradient(135deg,#0f2027,#2c5364,#f8cdda);
+  min-height:100vh;
+  margin:0;
+  background: linear-gradient(-45deg, #06070f, #0b0f2a, #141a3a, #1e1340);
+  background-size: 300% 300%;
+  animation: gradientFlow 16s ease infinite;
+  color:white;
+  font-family:Poppins;
+  position:relative;
+  overflow-x:hidden;
 }
 
-/* CARD */
-.card{
-    width:550px;
-    padding:30px;
-    border-radius:20px;
-    background:rgba(255,255,255,0.1);
-    backdrop-filter:blur(25px);
-    box-shadow:0 15px 50px rgba(0,0,0,0.5);
-    color:white;
+header{
+  padding:22px 15px 12px;
+  text-align:center;
+  position:relative;
+  z-index:2;
 }
 
-h2{text-align:center;margin-bottom:5px;}
-.subtitle{text-align:center;font-size:13px;margin-bottom:25px;opacity:0.8;}
-
-.input-box{
-    position:relative;
-    margin-bottom:18px;
+header h2{
+  font-size:30px;
+  letter-spacing:.8px;
+  background: linear-gradient(90deg, #f8fafc, #dbeafe, #fde68a);
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow: 0 6px 25px rgba(0,0,0,.35);
 }
 
-.input-box input,
-.input-box textarea,
-.input-box select{
-    width:100%;
-    padding:12px 40px;
-    border-radius:12px;
-    border:none;
-    outline:none;
-    background:rgba(255,255,255,0.2);
-    color:white;
-    font-size:14px;
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin:14px auto 6px;
 }
 
-/* FIX DROPDOWN */
-.input-box select option{
-    color:black;
-    background:white;
+.stat-card{
+  min-width:140px;
+  padding:10px 14px;
+  border-radius:12px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 28px rgba(8, 10, 35, .35);
 }
 
-.input-box textarea{
-    height:90px;
-    resize:none;
+.stat-card small{
+  display:block;
+  color:#dbeafe;
+  font-size:12px;
 }
 
-/* LABEL */
-.input-box label{
-    position:absolute;
-    top:12px;
-    left:40px;
-    font-size:13px;
-    color:#ddd;
-    transition:0.3s;
+.stat-card b{
+  font-size:20px;
+  color:#fde68a;
 }
 
-.input-box input:focus ~ label,
-.input-box input:not(:placeholder-shown) ~ label,
-.input-box textarea:focus ~ label,
-.input-box textarea:not(:placeholder-shown) ~ label,
-.input-box select:focus ~ label,
-.input-box select:valid ~ label{
-    top:-8px;
-    left:35px;
-    font-size:11px;
-    color:#00eaff;
+table{
+  width:95%;
+  margin:20px auto 35px;
+  background: rgba(255,255,255,.1);
+  color:#f8fafc;
+  border-radius:16px;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  backdrop-filter: blur(14px);
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow: 0 20px 60px rgba(3, 8, 30, .55);
+  position:relative;
+  z-index:2;
+  transform-style:preserve-3d;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
 
-/* ICON */
-.input-box i{
-    position:absolute;
-    top:12px;
-    left:12px;
-    color:#00eaff;
+th{
+  background: linear-gradient(90deg, rgba(59,130,246,.95), rgba(147,51,234,.95));
+  color:white;
+  font-weight:600;
+  text-transform:uppercase;
+  font-size:13px;
+  letter-spacing:.6px;
 }
 
-/* ROW */
-.row{
-    display:flex;
-    gap:10px;
+th,td{
+  padding:13px 10px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 
-.row .input-box{
-    flex:1;
+tbody tr{
+  transition: .25s ease;
 }
 
-/* FILE UPLOAD */
-.file-upload{
-    position:relative;
-    border:2px dashed rgba(255,255,255,0.4);
-    border-radius:15px;
-    text-align:center;
-    padding:20px;
-    cursor:pointer;
-    background:rgba(255,255,255,0.1);
-    margin-bottom:15px;
+tbody tr:hover{
+  background: rgba(255,255,255,.08);
+  transform: scale(1.004);
 }
 
-.file-upload:hover{
-    border-color:#00eaff;
+.skill{
+  background: linear-gradient(90deg,#2563eb,#7c3aed);
+  color:white;
+  padding:4px 10px;
+  border-radius:999px;
+  margin:2px;
+  display:inline-block;
+  font-size:12px;
+  box-shadow:0 6px 16px rgba(29,78,216,.35);
 }
 
-.file-upload input{
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    opacity:0;
-}
-
-#fileName{
-    margin-top:10px;
-    font-size:12px;
-    color:#00ffcc;
-}
-
-/* BUTTON */
 button{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:14px;
-    background:linear-gradient(90deg,#00eaff,#0072ff);
-    color:white;
-    font-size:16px;
-    cursor:pointer;
+  padding:6px 10px;
+  border:none;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
 }
 
-button:hover{
-    transform:scale(1.05);
+.select{background:#00c853;}
+.reject{background:#ff3d00;}
+.delete{background:#444;}
+
+.bg-blob{
+  position:fixed;
+  width:320px;
+  height:320px;
+  border-radius:50%;
+  filter: blur(70px);
+  opacity:.35;
+  z-index:0;
+  pointer-events:none;
 }
-.candi{
-    color:white;
-    text-decoration:none;
+
+.blob-1{
+  top:-60px;
+  left:-70px;
+  background:#2563eb;
+  animation: floatBlob 14s ease-in-out infinite;
+}
+
+.blob-2{
+  bottom:-120px;
+  right:-80px;
+  background:#7c3aed;
+  animation: floatBlob 17s ease-in-out infinite reverse;
+}
+
+.blob-3{
+  top:40%;
+  left:45%;
+  width:250px;
+  height:250px;
+  background:#22d3ee;
+  opacity:.2;
+  animation: floatBlob 12s ease-in-out infinite;
+}
+
+.sparkle{
+  position:fixed;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0) 70%);
+  pointer-events:none;
+  z-index:1;
+  animation: rise 10s linear forwards;
+}
+
+.fade-in{
+  animation: rowIn .5s ease forwards;
+  opacity:0;
+}
+
+@keyframes gradientFlow{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+@keyframes floatBlob{
+  0%,100%{transform:translate(0,0);}
+  50%{transform:translate(25px,-20px);}
+}
+
+@keyframes rise{
+  0%{transform:translateY(0) scale(.4);opacity:0;}
+  20%{opacity:.55;}
+  100%{transform:translateY(-120px) scale(1.25);opacity:0;}
+}
+
+@keyframes rowIn{
+  from{opacity:0;transform:translateY(8px);}
+  to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
 
 <body>
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
 
-<div class="card">
-    <h2>Candidate Profile</h2>
-    <div class="subtitle">Smart Recruiter System</div>
-
-    <form id="candidateForm">
-
-        <div class="input-box">
-            <i class="fas fa-user"></i>
-            <input type="text" id="name" required placeholder=" ">
-            <label>Full Name</label>
-        </div>
-
-        <div class="row">
-            <div class="input-box">
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="email" required placeholder=" ">
-                <label>Email</label>
-            </div>
-
-            <div class="input-box">
-                <i class="fas fa-phone"></i>
-                <input type="tel" id="phone" required placeholder=" ">
-                <label>Phone</label>
-            </div>
-        </div>
-
-        <div class="input-box">
-            <i class="fas fa-code"></i>
-            <input type="text" id="skills" required placeholder=" ">
-            <label>Skills</label>
-        </div>
-
-        <div class="row">
-            <div class="input-box">
-                <i class="fas fa-briefcase"></i>
-                <input type="number" id="experience" required placeholder=" ">
-                <label>Experience</label>
-            </div>
-
-            <div class="input-box">
-                <i class="fas fa-graduation-cap"></i>
-                <select id="education" required>
-                    <option value="" disabled selected>Select Education</option>
-                    <option>B.Tech</option>
-                    <option>BCA</option>
-                    <option>MCA</option>
-                    <option>M.Tech</option>
-                    <option>MBA</option>
-                    <option>BBA</option>
-                </select>
-                <label>Education</label>
-            </div>
-        </div>
-
-        <!-- FILE UPLOAD -->
-        <div class="file-upload">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Upload Resume</p>
-            <input type="file" id="fileInput" accept=".pdf,.doc,.docx" required>
-            <div id="fileName">No file selected</div>
-        </div>
-
-        <div class="input-box">
-            <i class="fas fa-user-edit"></i>
-            <textarea id="about" required placeholder=" "></textarea>
-            <label>About You</label>
-        </div>
-
-        <button type="submit"><a class="candi" href="candidate.html">Submit Profile</a></button>
-
-    </form>
+<header>
+<h2 id="mainTitle">Smart Recruiter Dashboard</h2>
+<div class="stats">
+  <div class="stat-card">
+    <small>Total Candidates</small>
+    <b id="totalCount">0</b>
+  </div>
+  <div class="stat-card">
+    <small>Selected</small>
+    <b id="selectedCount">0</b>
+  </div>
+  <div class="stat-card">
+    <small>Rejected</small>
+    <b id="rejectedCount">0</b>
+  </div>
 </div>
+</header>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Skills</th>
+<th>Experience</th>
+<th>Education</th>
+<th>Resume</th>
+<th>Status</th>
+
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+</table>
 
 <script>
-const fileInput = document.getElementById("fileInput");
-const fileName = document.getElementById("fileName");
 
-let selectedFile = null;
+function getDB(){
+return JSON.parse(localStorage.getItem("candidates")) || [];
+}
 
-// SHOW FILE NAME
-fileInput.addEventListener("change", function(){
-    if(this.files.length > 0){
-        selectedFile = this.files[0];
-        fileName.innerText = "Selected: " + selectedFile.name;
-    }
+function saveDB(data){
+localStorage.setItem("candidates", JSON.stringify(data));
+}
+
+function render(){
+
+let db=getDB();
+let table=document.getElementById("tableBody");
+
+table.innerHTML="";
+
+db.forEach(c=>{
+
+let skills=c.skills.map(s=>`<span class="skill">${s}</span>`).join("");
+
+table.innerHTML+=`
+<tr>
+<td>${c.name}</td>
+<td>${c.email}</td>
+<td>${c.phone}</td>
+<td>${skills}</td>
+<td>${c.experience}</td>
+<td>${c.education}</td>
+<td><a href="${c.resume}" target="_blank">View</a></td>
+<td>${c.status}</td>
+
+
+</tr>
+`;
 });
 
-// FORM SUBMIT
-document.getElementById("candidateForm").addEventListener("submit", function(e){
-    e.preventDefault();
+animateRows();
+animateCounters(db);
+}
 
-    if(!selectedFile){
-        alert("Please upload resume!");
-        return;
-    }
-
-    let reader = new FileReader();
-
-    reader.onload = function(){
-
-        let candidate = {
-            id: Date.now(),
-            name: name.value,
-            email: email.value,
-            phone: phone.value,
-            skills: skills.value.split(",").map(s=>s.trim().toUpperCase()),
-            experience: experience.value,
-            education: education.value,
-            about: about.value,
-            resume: reader.result,
-            status: "Pending"
-        };
-
-        let db = JSON.parse(localStorage.getItem("candidates")) || [];
-        db.push(candidate);
-
-        localStorage.setItem("candidates", JSON.stringify(db));
-
-        alert("Profile Submitted Successfully ✅");
-
-        window.location.href = "dashboard.html";
-    };
-
-    reader.readAsDataURL(selectedFile);
+function animateRows(){
+const rows = document.querySelectorAll("#tableBody tr");
+rows.forEach((row, i)=>{
+  row.classList.add("fade-in");
+  row.style.animationDelay = `${i * 70}ms`;
 });
+}
+
+function createSparkles(){
+setInterval(()=>{
+  const dot = document.createElement("span");
+  dot.className = "sparkle";
+  dot.style.left = Math.random() * window.innerWidth + "px";
+  dot.style.top = Math.random() * window.innerHeight + "px";
+  document.body.appendChild(dot);
+  setTimeout(()=> dot.remove(), 10000);
+}, 380);
+}
+
+function animateNumber(el, target){
+const duration = 900;
+const start = Number(el.textContent) || 0;
+const startTime = performance.now();
+
+function tick(now){
+  const progress = Math.min((now - startTime) / duration, 1);
+  const value = Math.floor(start + (target - start) * progress);
+  el.textContent = value;
+  if(progress < 1) requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+}
+
+function animateCounters(db){
+const total = db.length;
+const selected = db.filter(c=>String(c.status).toLowerCase() === "selected").length;
+const rejected = db.filter(c=>String(c.status).toLowerCase() === "rejected").length;
+
+animateNumber(document.getElementById("totalCount"), total);
+animateNumber(document.getElementById("selectedCount"), selected);
+animateNumber(document.getElementById("rejectedCount"), rejected);
+}
+
+function initTitleTyping(){
+const title = document.getElementById("mainTitle");
+const fullText = "Smart Recruiter Dashboard";
+let i = 0;
+title.textContent = "";
+const type = setInterval(()=>{
+  title.textContent += fullText.charAt(i);
+  i++;
+  if(i >= fullText.length) clearInterval(type);
+}, 65);
+}
+
+function addTableTilt(){
+const table = document.querySelector("table");
+table.addEventListener("mousemove", (e)=>{
+  const rect = table.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const rotateY = ((x / rect.width) - 0.5) * 4;
+  const rotateX = ((y / rect.height) - 0.5) * -3;
+  table.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  table.style.boxShadow = "0 28px 70px rgba(3, 8, 30, .65)";
+});
+
+table.addEventListener("mouseleave", ()=>{
+  table.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
+  table.style.boxShadow = "0 20px 60px rgba(3, 8, 30, .55)";
+});
+}
+
+function selectCandidate(id){
+let db=getDB().map(c=>{
+if(c.id===id) c.status="Selected";
+return c;
+});
+saveDB(db); render();
+}
+
+function rejectCandidate(id){
+let db=getDB().map(c=>{
+if(c.id===id) c.status="Rejected";
+return c;
+});
+saveDB(db); render();
+}
+
+function deleteCandidate(id){
+saveDB(getDB().filter(c=>c.id!==id));
+render();
+}
+
+render();
+createSparkles();
+initTitleTyping();
+addTableTilt();
+
 </script>
 
 </body>

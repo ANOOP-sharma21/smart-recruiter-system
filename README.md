@@ -19,7 +19,7 @@ smart-recruiter-backend → Backend + Database
 
 ---
 
-## 🚀 How to Run Project
+## 🚀 How to Run Demo Project
 
 1. Clone repo
 
@@ -30,22 +30,21 @@ git checkout fullstack-demo
 2. Go to backend
 cd smart-recruiter-system/smart-recruiter-backend
 
-3. Install dependencies using this command in the command shell of your vs code or project folder : 
+3. Install dependencies (Inside backend Folder !) using this command in the command shell of your vs code or project folder : 
 npm install
 
 NOTE: Note: npm warnings about old packages are normal and do not affect functionality.
 
-5. Run backend using the command  INSIDE your backend folder:
+4. Run backend using the command  INSIDE your backend folder:
 node server.js
 
-6. Open frontend :
-
+5. Open frontend :
 Go back and open:
 frontend/index.html
 
 
 [ Suggestion ] : Create .env file of your own so you have access to your own database
-use chatgpt to learn about how to connect mongodb atlas in your .env file, B U T if its hard, I have already created my own .env file inside backend folder so you can just keep it   as it is   and just run the demo project
+use chatgpt to learn about how to connect mongodb atlas in your .env file, B U T if its hard, or if you just want to see how the demo works, I have already created my own .env file inside backend folder so you can just keep it   as it is   and just run the demo project as mentioned above
 
 
 ---

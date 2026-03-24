@@ -21,13 +21,14 @@ smart-recruiter-backend → Backend + Database
 
 ## 🚀 How to Run Demo Project
 
-1. Clone repo
+1. Clone the repo
 
 git clone https://github.com/ANOOP-sharma21/smart-recruiter-system
 
 git checkout fullstack-demo
 
 2. Go to backend
+
 cd smart-recruiter-system/smart-recruiter-backend
 
 3. Install dependencies (Inside backend Folder !) using this command in the command shell of your vs code or project folder : 

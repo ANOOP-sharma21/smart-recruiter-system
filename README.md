@@ -33,6 +33,8 @@ Git bash Command: cd smart-recruiter-system/smart-recruiter-backend
 
 3. Install dependencies (Inside backend Folder !) using this command in the command shell of your vs code or project folder : 
 
+NOTE: Note: npm warnings about old packages are normal and do not affect functionality.
+
 Git bash Command: npm install
 
 

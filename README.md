@@ -23,25 +23,29 @@ smart-recruiter-backend → Backend + Database
 
 1. Clone the repo
 
-git clone https://github.com/ANOOP-sharma21/smart-recruiter-system
+Git bash Command: git clone https://github.com/ANOOP-sharma21/smart-recruiter-system
 
-git checkout fullstack-demo
+Git bash Command: git checkout fullstack-demo
 
 2. Go to backend
 
-cd smart-recruiter-system/smart-recruiter-backend
+Git bash Command: cd smart-recruiter-system/smart-recruiter-backend
 
 3. Install dependencies (Inside backend Folder !) using this command in the command shell of your vs code or project folder : 
-npm install
+
+Git bash Command: npm install
 
 NOTE: Note: npm warnings about old packages are normal and do not affect functionality.
 
 4. Run backend using the command  INSIDE your backend folder:
-node server.js
+
+Git bash Command: node server.js
 
 5. Open frontend :
-Go back and open:
+Go Back and Open and RUN:
 frontend/index.html
+
+Try uploading a submission and see if it works properly or not
 
 
 [ Suggestion ] : Create .env file of your own so you have access to your own database

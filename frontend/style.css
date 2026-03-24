@@ -1,0 +1,284 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+/*  BODY GRADIENT (BACKGROUND BASE) */
+body{
+  background: linear-gradient(-45deg,#0f2027,#2c5364,#1d2671,#c33764);
+  background-size:400% 400%;
+  animation:gradient 12s ease infinite;
+  color:white;
+}
+
+@keyframes gradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/*  NAVBAR */
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 30px;
+  backdrop-filter:blur(15px);
+  background:rgba(0,0,0,0.4);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:600;
+}
+
+.nav-links{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
+}
+
+.nav-links a:hover{
+  color:#00eaff;
+}
+
+/* RIGHT SIDE NAV */
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:25px;
+}
+
+/* NAV LINKS */
+.nav-links{
+  display:flex;
+  gap:20px;
+  list-style:none;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  transition:0.3s;
+  position:relative;
+}
+
+/* underline animation */
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:2px;
+  background:#00eaff;
+  left:0;
+  bottom:-5px;
+  transition:0.3s;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+/* BUTTONS */
+.nav-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.nav-buttons button{
+  padding:8px 16px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.3s;
+  font-size:14px;
+}
+
+/* LOGIN */
+.login{
+  background:transparent;
+  color:white;
+  border:1px solid white;
+}
+
+.login:hover{
+  background:white;
+  color:black;
+}
+
+/* SIGNUP */
+.signup{
+  background:linear-gradient(90deg,#00eaff,#0072ff);
+  border:none;
+  color:white;
+}
+
+.signup:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 10px #00eaff;
+}
+
+/*  HERO WITH IMAGE + OVERLAY */
+.hero{
+  position:relative;
+  height:90vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  /* YOUR ORIGINAL IMAGE BACK */
+  background: url('./assets/hero.png') no-repeat center/cover;
+}
+
+/*  OVERLAY (gradient + animation) */
+.hero::before{
+  content:"";
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+
+  background: linear-gradient(-45deg,
+    rgba(15,32,39,0.7),
+    rgba(44,83,100,0.6),
+    rgba(29,38,113,0.6),
+    rgba(195,55,100,0.5)
+  );
+
+  background-size:400% 400%;
+  animation:gradient 10s ease infinite;
+
+  z-index:1;
+}
+
+/* CONTENT ABOVE OVERLAY */
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+
+.hero-content h1{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.hero-content p{
+  margin-bottom:20px;
+  opacity:0.9;
+}
+
+/* BUTTONS */
+.buttons{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+}
+
+.btn{
+  padding:12px 20px;
+  border-radius:12px;
+  text-decoration:none;
+  color:white;
+  background:linear-gradient(90deg,#00eaff,#0072ff);
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 15px #00eaff;
+}
+
+/*  FEATURES */
+.features{
+  padding:60px;
+  text-align:center;
+}
+
+.card-container{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  margin-top:20px;
+}
+
+.glass-card{
+  width:250px;
+  padding:25px;
+  border-radius:15px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(20px);
+  transition:0.3s;
+}
+
+.glass-card:hover{
+  transform:translateY(-10px);
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+
+/*  AI BOX */
+.ai-preview{
+  padding:60px;
+  text-align:center;
+}
+
+.ai-box{
+  margin-top:20px;
+  padding:20px;
+  background:rgba(255,255,255,0.1);
+  border-radius:15px;
+  backdrop-filter:blur(20px);
+}
+
+.progress-bar{
+  width:100%;
+  height:8px;
+  background:rgba(255,255,255,0.2);
+  border-radius:10px;
+  overflow:hidden;
+  margin:10px 0;
+}
+
+.progress{
+  height:100%;
+  width:0;
+  background:#00eaff;
+  animation:load 3s infinite;
+}
+
+@keyframes load{
+  0%{width:0}
+  50%{width:90%}
+  100%{width:0}
+}
+
+.result{
+  color:#00ffcc;
+}
+
+/*  PARTICLES CANVAS */
+#particles{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+
+/* Make content above particles */
+.hero, .navbar, .features, .ai-preview{
+  position:relative;
+  z-index:2;
+}

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentSync</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <canvas id="particles"></canvas>
+    <!-- NAVBAR -->
+    <header>
+      <nav class="navbar">
+  <div class="logo">TalentSync</div>
+
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link active">Home</a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+    </ul>
+
+    <div class="nav-buttons">
+      <button class="login">Login</button>
+      <button class="signup">Sign Up</button>
+    </div>
+  </div>
+</nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="overlay"></div>
+
+      <div class="hero-content">
+        <h1><span id="typing"></span></h1>
+        <p>Connect candidates with recruiters using AI-powered matching</p>
+
+        <div class="buttons">
+          <a href="candidate.html" class="btn candidate">I am Candidate</a>
+          <a href="dashboard.html" class="btn recruiter">I am Recruiter</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GLASSMORPHISM FEATURES -->
+    <section class="features">
+      <h2>Why Choose TalentSync?</h2>
+
+      <div class="card-container">
+        <div class="glass-card">
+          <i class="fa-solid fa-robot" style="color: white; font-size: 30px;"></i><br><br>
+          <h3>AI Matching</h3>
+          <p>Smart algorithm connects candidates with perfect job roles.</p>
+        </div>
+
+        <div class="glass-card">
+           <i class="fa-solid fa-user-tie" style="color: white; font-size: 30px;"></i><br><br>
+          <h3>Fast Hiring</h3>
+          <p>Reduce hiring time with automated screening process.</p>
+        </div>
+
+        <div class="glass-card">
+           <i class="fa-solid fa-chart-line" style="color: white; font-size: 30px;"></i><br><br>
+          <h3>Smart Dashboard</h3>
+          <p>Track applications and analytics in real-time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI PREVIEW SECTION -->
+    <section class="ai-preview">
+      <div class="ai-content">
+        <h2>AI Recruiter Assistant</h2>
+        <p>
+          Our AI scans resumes, analyzes skills, and ranks candidates instantly.
+        </p>
+
+        <div class="ai-box">
+          <p><strong>Analyzing Resume...</strong></p>
+          <div class="progress-bar">
+            <div class="progress"></div>
+          </div>
+          <p class="result">Top Match Score: 92%</p>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

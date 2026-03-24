@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Recruiter Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+/*  BACKGROUND */
+body{
+  min-height:100vh;
+  background: linear-gradient(-45deg,#1d2671,#c33764,#0f2027,#2c5364);
+  background-size:400% 400%;
+  animation:gradient 10s ease infinite;
+  color:white;
+}
+
+@keyframes gradient{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* HEADER */
+header{
+  padding:20px;
+  text-align:center;
+  font-size:22px;
+  font-weight:600;
+}
+
+/* CARDS */
+.cards{
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  flex:1;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(20px);
+  padding:20px;
+  border-radius:15px;
+  text-align:center;
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 0 15px rgba(255,255,255,0.2);
+}
+
+/* TABLE */
+.table-container{
+  padding:20px;
+}
+
+table{
+  width:100%;
+  background:white;
+  color:black;
+  border-radius:15px;
+  overflow:hidden;
+  border-collapse:collapse;
+}
+
+th{
+  background:#0072ff;
+  color:white;
+}
+
+th,td{
+  padding:12px;
+  text-align:center;
+}
+
+tr:hover{
+  background:#f2f2f2;
+}
+
+/* SKILLS */
+.skill-tag{
+  background:#0072ff;
+  color:white;
+  padding:4px 8px;
+  border-radius:10px;
+  margin:2px;
+  display:inline-block;
+}
+
+/* BUTTONS */
+.btn{
+  padding:6px 10px;
+  border:none;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+  margin:2px;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+}
+
+.select{background:#00c853;}
+.reject{background:#ff3d00;}
+.delete{background:#444;}
+.view{background:#0072ff;}
+
+</style>
+</head>
+
+<body>
+
+<header>
+Smart Recruiter Dashboard 🚀
+</header>
+
+<section class="cards">
+<div class="card">Total <h2 id="total">0</h2></div>
+<div class="card">Selected <h2 id="selected">0</h2></div>
+<div class="card">Rejected <h2 id="rejected">0</h2></div>
+</section>
+
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Skills</th>
+<th>Exp</th>
+<th>Education</th>
+<th>Resume</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+</table>
+</div>
+
+<script>
+
+// FETCH DATA
+async function fetchCandidates(){
+  const res = await fetch("http://localhost:5000/api/candidates");
+  return await res.json();
+}
+
+// UPDATE STATUS
+async function updateStatus(id, status){
+  await fetch(`http://localhost:5000/api/candidates/${id}`, {
+    method: "PUT",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({status})
+  });
+
+  render();
+}
+
+// DELETE
+async function deleteCandidate(id){
+  await fetch(`http://localhost:5000/api/candidates/${id}`, {
+    method: "DELETE"
+  });
+
+  render();
+}
+
+// EMAIL
+function sendMail(email, name, status){
+let subject = status==="Selected" ? "Job Selection 🎉" : "Application Update";
+
+let body = status==="Selected"
+? `Congrats ${name}, you are selected!`
+: `Sorry ${name}, you were not selected.`;
+
+window.location.href =
+`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// RENDER
+async function render(){
+
+const db = await fetchCandidates();
+const table = document.getElementById("tableBody");
+
+table.innerHTML = "";
+
+let selected=0, rejected=0;
+
+db.forEach(c=>{
+
+if(c.status==="Selected") selected++;
+if(c.status==="Rejected") rejected++;
+
+//  SKILL FIX (string → array)
+let skillsArray = typeof c.skills === "string" ? c.skills.split(",") : c.skills;
+
+let skills = skillsArray.map(s=>`<span class="skill-tag">${s.trim()}</span>`).join("");
+
+table.innerHTML += `
+<tr>
+<td>${c.name}</td>
+<td>${c.email}</td>
+<td>${c.phone}</td>
+<td>${skills}</td>
+<td>${c.experience}</td>
+<td>${c.education}</td>
+<td><a href="http://localhost:5000/uploads/${c.resume}" target="_blank" class="btn view">View</a></td>
+<td>${c.status || "Pending"}</td>
+
+<td>
+<button class="btn select" onclick="updateStatus('${c._id}','Selected');sendMail('${c.email}','${c.name}','Selected')">Select</button>
+<button class="btn reject" onclick="updateStatus('${c._id}','Rejected');sendMail('${c.email}','${c.name}','Rejected')">Reject</button>
+<button class="btn delete" onclick="deleteCandidate('${c._id}')">Delete</button>
+</td>
+</tr>
+`;
+});
+
+document.getElementById("total").innerText = db.length;
+document.getElementById("selected").innerText = selected;
+document.getElementById("rejected").innerText = rejected;
+
+}
+
+render();
+
+</script>
+
+</body>
+</html>

@@ -33,10 +33,12 @@ cd smart-recruiter-system/smart-recruiter-backend
 3. Install dependencies using this command in the command shell of your vs code or project folder : 
 npm install
 
-4. Run backend using the command  INSIDE your backend folder:
+NOTE: Note: npm warnings about old packages are normal and do not affect functionality.
+
+5. Run backend using the command  INSIDE your backend folder:
 node server.js
 
-5. Open frontend :
+6. Open frontend :
 
 Go back and open:
 frontend/index.html

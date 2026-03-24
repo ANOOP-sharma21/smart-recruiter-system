@@ -13,9 +13,9 @@ smart-recruiter-backend → Backend + Database
 
 ## ⚙️ Requirements
 
-- Node.js
-- Git
-- MongoDB Atlas account
+- Node.js (Download in you laptop)
+- Git (Bash)
+- MongoDB Atlas account (Optional, can do later)
 
 ---
 

@@ -22,7 +22,9 @@ smart-recruiter-backend → Backend + Database
 ## 🚀 How to Run Project
 
 1. Clone repo
+
 git clone https://github.com/ANOOP-sharma21/smart-recruiter-system
+
 git checkout fullstack-demo
 
 2. Go to backend

@@ -37,7 +37,7 @@ Git bash Command: npm install
 
 NOTE: Note: npm warnings about old packages are normal and do not affect functionality.
 
-4. Run backend using the command  INSIDE your backend folder:
+4. Run backend Server using the command  INSIDE your backend folder:
 
 Git bash Command: node server.js
 

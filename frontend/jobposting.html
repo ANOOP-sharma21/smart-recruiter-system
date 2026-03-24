@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Post a Job</title>
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f4f6f8;
+    }
+    .container {
+      width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 50px;
+      box-shadow: 0 0 10px gray;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+    button {
+      width: 48%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .post-btn {
+      background-color: green;
+    }
+    .cancel-btn {
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Post a Job</h2>
+
+  <input type="text" placeholder="Job Title">
+  <input type="text" placeholder="Company Name">
+  <input type="text" placeholder="Location">
+  
+  <select>
+    <option>Job Type</option>
+    <option>Full-Time</option>
+    <option>Internship</option>
+    <option>Remote</option>
+  </select>
+
+  <textarea placeholder="Job Description"></textarea>
+  <input type="text" placeholder="Required Skills">
+  <input type="text" placeholder="Experience Required">
+
+  <input type="text" placeholder="Salary Range">
+  <input type="date">
+
+  <button class="post-btn">Post Job</button>
+  <button class="cancel-btn">Cancel</button>
+
+</div>
+
+</body>
+</html>

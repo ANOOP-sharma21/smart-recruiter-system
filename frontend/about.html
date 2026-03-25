@@ -6,70 +6,82 @@
     <title>About Us</title>
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
-
-    background: 
-        linear-gradient(to right, rgba(30,60,114,0.85), rgba(42,82,152,0.5)),
-        url("./assets/hero.png");
-
-    background-size: cover;
-    background-position: right center;
-    background-repeat: no-repeat;
+     * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+body {
+  color: #fff;
+}
 
-/* NavBar */
-
+/* NAVBAR */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 80px; /* more spacing */
-    background: rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* FIXED */
-    backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
 }
 
-
-
-
-.nav-links a {
-    margin: 0px 15px;
-    text-decoration: none;
-    color: white;
-    opacity: 0.8;
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #00d4ff;
 }
 
-.nav-links a.active {
-    border-bottom: 2px solid white;
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
 }
 
-.nav-buttons button {
-    margin-left: 10px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
+.nav-link {
+  text-decoration: none;
+  color: white;
+  position: relative;
+  font-size: 16px;
+  transition: 0.3s;
 }
 
-.login {
-    background: transparent;
-    color: white;
-    border: 1px solid white;
+/* underline effect */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background: #00d4ff;
+  left: 0;
+  bottom: -5px;
+  transition: 0.3s;
 }
 
-.signup {
-    background: orange;
-    color: white;
-    border: none;
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
 }
+
 .about-container {
       width: 600px;
       text-align: center;
+      position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
     }
-
+    .about-container h1{
+      width: 100%;
+      margin: 100px;
+      font-size: 50px;
+      padding-right: 100px;
+    }
     .content-box {
       display: none;
       background: #fff;
@@ -77,6 +89,8 @@
       margin-top: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-right: 50px;
+      width: 800px;
     }
 
     .content-box.active {
@@ -111,22 +125,25 @@
     }
     p{
         color: black;
-        font-size: 25px;
-        font-family: Arial, Helvetica, sans-serif;
+        font-size: 30px;
+       font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+
     }
     h2{
         color: black;
-        font-size: 30px;
+        font-size: 35px;
         font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
     }
    #box1,#box2,#box3,#box4{
-    width: 100%;
-    margin-left: 430px;
+   height: 240px;
+    margin-left: 400px;
    
    }
    
    .dots{
-    margin-left: 450px;
+    margin-left: 46px;
     width: 100%;
    }
    h1{
@@ -140,6 +157,9 @@
   font-size: 35px;
   color: white;
 }
+.who-we-are{
+   background: #0f172a;
+}
 
 .who-we-are h2::before,
 .who-we-are h2::after {
@@ -148,7 +168,7 @@
   top: 50%;
   width: 40%;
   height: 2px;
-  background:black;
+  background:white;
 }
 
 .who-we-are h2::before {
@@ -162,6 +182,9 @@
     color: white;
     margin-left: 30px;
     margin-right: 30px;
+}
+.what-we-do{
+    background: #0f172a;
 }
 .what-we-do {
   margin-top: 50px;
@@ -190,6 +213,7 @@
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   text-align: center;
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
 .feature-box:hover {
@@ -211,7 +235,7 @@
   top: 50%;
   width: 40%;
   height: 2px;
-  background:black;
+  background:white;
 }
 
 .what-we-do h2::before {
@@ -232,6 +256,8 @@
   margin: 40px 0;
   font-size: 18px;
   font-weight: bold;
+  cursor: pointer;
+    background: #0f172a;
 }
 
 .step {
@@ -247,53 +273,59 @@
 .arrow {
   font-size: 40px;
   margin: 0 8px;
-  color:black;
-  font-weight: 900;
+  color:white;
+  font-weight: 9000;
 }
+.hero {
+  height: 100vh;
+  background: url('./assets/hero.png') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
 
     </style>
     
 </head>
-<body>
-     <!-- NavBar -->
-    <nav class="navbar">
-        <div class="logo">
-            <span>🧡</span>
-            <h1>Smart Recruiter System</h1>
-        </div>
+<body style="background-color: #0f172a;;">
+    <header>
+      <nav class="navbar">
+        <div class="logo">TalentSync</div>
 
-        <div class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#">About Us</a>
-            <a href="#">How It Works</a>
-            <a href="#">For Employers</a>
-        </div>
+        <ul class="nav-links">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="about.html" target="_blank" class="nav-link">About Us</a></li>
+          <li><a href="#" class="nav-link">How It Works</a></li>
+        </ul>
 
-        <div class="nav-buttons">
-            <button class="login">Login</button>
-            <button class="signup">Sign Up</button>
-        </div>
-    </nav>
-    <h1>About Us</h1>
+      </nav>
+    </header>
+    
+    <section class="hero">
+    
       <div class="about-container">
+        <h1>About Us</h1>
 
     <div id="box1" class="content-box active">
-      <h2>Welcome</h2>
+      <h2>Welcome</h2><br>
       <p>Welcome to Smart Recruiter! We’re here to make hiring smarter, faster, and more human.</p>
     </div>
 
     <div id="box2" class="content-box">
-      <h2>Our Vision</h2>
+      <h2>Our Vision</h2><br>
       <p>We envision a world where recruitment is seamless, transparent, and empowering for both employers and candidates.</p>
     </div>
 
     <div id="box3" class="content-box">
-      <h2>Why Choose Us</h2>
+      <h2>Why Choose Us</h2><br>
       <p>We combine cutting-edge technology with human expertise to deliver the best talent solutions for your business.</p>
     </div>
 
     <div id="box4" class="content-box">
-      <h2>Thank You</h2>
+      <h2>Thank You</h2><br>
       <p>Thank you for trusting Smart Recruiter. Together, we’ll build stronger teams and brighter futures.</p>
     </div>
 
@@ -303,7 +335,7 @@
       <span class="dot" onclick="showBox(3)"></span>
       <span class="dot" onclick="showBox(4)"></span>
     </div>
-  </div><br>
+  </div></section>
   <div class="who-we-are">
   <h2>Who We Are</h2>
   <p>
@@ -326,7 +358,8 @@
   <p>
     Our commitment is simple: to make hiring smarter, faster, and more human. That’s who we are — and that’s what drives us every day.
   </p>
-</div>
+  
+</div></section>
 <div class="what-we-do">
   <h2>What We Do</h2>
   <div class="features">
@@ -376,6 +409,24 @@
       document.getElementById('box' + n).classList.add('active');
       dots[n-1].classList.add('active');
     }
+    // MOBILE MENU TOGGLE
+const toggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+toggle.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
+});
+
+// ACTIVE NAV LINK LOGIC
+const links = document.querySelectorAll(".nav-link");
+
+links.forEach(link => {
+  link.addEventListener("click", function () {
+    links.forEach(l => l.classList.remove("active"));
+    this.classList.add("active");
+  });
+});
+
   </script>
     
 </body>

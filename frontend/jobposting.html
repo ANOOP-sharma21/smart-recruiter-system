@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Dashboard</title>
+=======
+<title>Post Job - Premium UI</title>
+>>>>>>> 2f1ec31f3043be808570eba3ad925954a8df7839
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+<<<<<<< HEAD
 body{
   min-height:100vh;
   margin:0;
@@ -201,6 +206,158 @@ button{
 @keyframes rowIn{
   from{opacity:0;transform:translateY(8px);}
   to{opacity:1;transform:translateY(0);}
+=======
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #667eea, #764ba2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card */
+.container {
+  width: 90%;
+  max-width: 900px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  color: white;
+  animation: fadeIn 0.8s ease;
+}
+
+/* Title */
+.container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+/* Grid Layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.full {
+  grid-column: span 2;
+}
+
+/* Input Box */
+.input-box {
+  position: relative;
+}
+
+.input-box input,
+.input-box textarea,
+.input-box select {
+  width: 100%;
+  padding: 14px 14px 14px 40px;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  background: rgba(255,255,255,0.2);
+  color: rgba(0,0,0,0.3);
+  font-size: 14px;
+}
+
+/* Icons */
+.input-box i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-style: normal;
+  opacity: 0.7;
+}
+
+/* Focus */
+.input-box input:focus,
+.input-box textarea:focus,
+.input-box select:focus {
+  background: rgba(255,255,255,0.3);
+  color: blue
+}
+
+/* Textarea */
+textarea {
+  height: 90px;
+  resize: none;
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+button {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.post-btn {
+  background: linear-gradient(45deg, #00c853, #69f0ae);
+}
+
+.cancel-btn {
+  background: linear-gradient(45deg, #ff1744, #ff8a80);
+}
+
+button:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #00c853;
+  padding: 14px 20px;
+  border-radius: 10px;
+  display: none;
+  color: white;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media(max-width: 700px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .full {
+    grid-column: span 1;
+  }
+>>>>>>> 2f1ec31f3043be808570eba3ad925954a8df7839
 }
 </style>
 </head>
@@ -210,6 +367,7 @@ button{
 <div class="bg-blob blob-2"></div>
 <div class="bg-blob blob-3"></div>
 
+<<<<<<< HEAD
 <header>
 <h2 id="mainTitle">Smart Recruiter Dashboard</h2>
 <div class="stats">
@@ -225,6 +383,70 @@ button{
     <small>Rejected</small>
     <b id="rejectedCount">0</b>
   </div>
+=======
+<div class="container">
+  <h2>🚀 Post a New Job</h2>
+
+  <div class="form-grid">
+
+    <div class="input-box">
+      <i>💼</i>
+      <input type="text" id="title" placeholder="Job Title">
+    </div>
+
+    <div class="input-box">
+      <i>🏢</i>
+      <input type="text" id="company" placeholder="Company Name">
+    </div>
+
+    <div class="input-box">
+      <i>📍</i>
+      <input type="text" id="location" placeholder="Location">
+    </div>
+
+    <div class="input-box">
+      <i>🕒</i>
+      <select id="type">
+        <option value="">Job Type</option>
+        <option>Full-Time</option>
+        <option>Internship</option>
+        <option>Remote</option>
+      </select>
+    </div>
+
+    <div class="input-box full">
+      <i>📝</i>
+      <textarea id="desc" placeholder="Job Description"></textarea>
+    </div>
+
+    <div class="input-box">
+      <i>🧠</i>
+      <input type="text" id="skills" placeholder="Skills Required">
+    </div>
+
+    <div class="input-box">
+      <i>📊</i>
+      <input type="text" id="exp" placeholder="Experience">
+    </div>
+
+    <div class="input-box">
+      <i>💰</i>
+      <input type="text" id="salary" placeholder="Salary Range">
+    </div>
+
+    <div class="input-box">
+      <i>📅</i>
+      <input type="date" id="date">
+    </div>
+
+  </div>
+
+  <div class="btn-group">
+    <button class="post-btn" onclick="postJob()">Post Job</button>
+    <button class="cancel-btn" onclick="clearForm()">Cancel</button>
+  </div>
+
+>>>>>>> 2f1ec31f3043be808570eba3ad925954a8df7839
 </div>
 </header>
 
@@ -386,6 +608,42 @@ createSparkles();
 initTitleTyping();
 addTableTilt();
 
+</script>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function postJob() {
+  let fields = document.querySelectorAll("input, textarea, select");
+  let valid = true;
+
+  fields.forEach(field => {
+    if (field.value === "") valid = false;
+  });
+
+  if (!valid) {
+    showToast("❌ Fill all fields", "#ff1744");
+  } else {
+    showToast("✅ Job Posted Successfully", "#00c853");
+    clearForm();
+  }
+}
+
+function clearForm() {
+  document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+  document.querySelector("select").value = "";
+}
+
+function showToast(message, color) {
+  let toast = document.getElementById("toast");
+  toast.innerText = message;
+  toast.style.background = color;
+  toast.style.display = "block";
+
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 3000);
+}
 </script>
 
 </body>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2d9d6cfd3.js"></script>
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+    body{
+      min-height:100vh;
+      margin:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:24px 16px;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(251, 191, 36, 0.08), transparent 32%),
+        radial-gradient(circle at 22% 18%, rgba(56, 189, 248, 0.14), transparent 38%),
+        radial-gradient(circle at 82% 8%, rgba(192, 132, 252, 0.18), transparent 34%),
+        radial-gradient(circle at 70% 85%, rgba(34, 211, 238, 0.06), transparent 40%),
+        linear-gradient(-45deg, #020308, #060b1f, #0f172a, #1a1140, #1e1035);
+      background-size: cover, cover, cover, cover, 340% 340%;
+      animation: premiumFlow 22s ease infinite;
+      color:#e2e8f0;
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    @keyframes premiumFlow{
+      0%{background-position:0% 40%;}
+      50%{background-position:100% 60%;}
+      100%{background-position:0% 40%;}
+    }
+
+    .bg-blob{
+      position:fixed;
+      width:300px;
+      height:300px;
+      border-radius:50%;
+      filter:blur(85px);
+      opacity:.32;
+      pointer-events:none;
+      z-index:0;
+    }
+    .blob-1{left:-80px;top:-40px;background:#3b82f6;animation:floatBlob 16s ease-in-out infinite;}
+    .blob-2{right:-100px;bottom:-80px;background:#a855f7;animation:floatBlob 19s ease-in-out infinite reverse;}
+    .blob-3{width:200px;height:200px;left:40%;top:45%;background:#22d3ee;opacity:.18;animation:floatBlob 13s ease-in-out infinite;}
+
+    @keyframes floatBlob{
+      0%,100%{transform:translate(0,0);}
+      50%{transform:translate(22px,-18px);}
+    }
+
+    .sparkle{
+      position:fixed;
+      width:8px;height:8px;border-radius:50%;
+      background:radial-gradient(circle,#fff 0%,transparent 70%);
+      pointer-events:none;z-index:0;
+      animation:rise 11s linear forwards;
+    }
+    @keyframes rise{
+      0%{transform:translateY(0) scale(.35);opacity:0;}
+      15%{opacity:.55;}
+      100%{transform:translateY(-100px) scale(1.1);opacity:0;}
+    }
+
+    .card{
+      width:560px;
+      max-width:100%;
+      padding:32px;
+      border-radius:22px;
+      background:rgba(255,255,255,0.07);
+      backdrop-filter:blur(26px);
+      border:1px solid rgba(255,255,255,0.14);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04) inset,
+        0 28px 60px rgba(2, 6, 23, .65);
+      color:white;
+      position:relative;
+      z-index:2;
+      transform-style:preserve-3d;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+
+    .form-heading{
+      text-align:center;
+      margin-bottom:26px;
+      position:relative;
+    }
+    .form-heading-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#bae6fd;
+      padding:8px 14px;
+      border-radius:999px;
+      background:rgba(56,189,248,.12);
+      border:1px solid rgba(56,189,248,.35);
+      box-shadow:0 4px 20px rgba(37,99,235,.2);
+      margin-bottom:14px;
+      animation: badgeIn .7s ease .15s both;
+    }
+    .form-heading-badge i{font-size:12px;opacity:.9;}
+
+    .form-heading-title{
+      position:relative;
+      display:inline-flex;
+      align-items:baseline;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:4px;
+      font-size:clamp(1.65rem,4.5vw,2.05rem);
+      font-weight:800;
+      letter-spacing:-.03em;
+      line-height:1.15;
+      margin:0 0 12px;
+      min-height:1.2em;
+    }
+    .form-heading-shimmer{
+      position:absolute;
+      left:-20%;
+      top:-50%;
+      width:50%;
+      height:200%;
+      background:linear-gradient(105deg,transparent,rgba(255,255,255,.22),transparent);
+      transform:skewX(-18deg);
+      pointer-events:none;
+      opacity:0;
+      animation:none;
+    }
+    .form-heading.is-ready .form-heading-shimmer{
+      opacity:1;
+      animation: headingSheen 2.8s ease-in-out infinite;
+    }
+    @keyframes headingSheen{
+      0%{transform:skewX(-18deg) translateX(-120%);}
+      100%{transform:skewX(-18deg) translateX(380%);}
+    }
+    .form-heading-text{
+      background:linear-gradient(105deg,#ffffff 0%,#e0f2fe 18%,#fde68a 42%,#ddd6fe 68%,#67e8f9 100%);
+      background-size:220% auto;
+      background-clip:text;
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      filter:drop-shadow(0 6px 24px rgba(56,189,248,.28));
+    }
+    .form-heading-title.title-ready .form-heading-text{
+      animation: headingGradientMove 5s ease-in-out infinite;
+    }
+    @keyframes headingGradientMove{
+      0%,100%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+    }
+    .form-heading-cursor{
+      display:inline-block;
+      width:3px;
+      height:0.95em;
+      margin-left:2px;
+      background:linear-gradient(180deg,#67e8f9,#a78bfa);
+      border-radius:2px;
+      vertical-align:-2px;
+      animation: cursorBlink .85s step-end infinite;
+      box-shadow:0 0 12px rgba(103,232,249,.7);
+    }
+    .form-heading-cursor.cursor-off{opacity:0;animation:none;}
+    @keyframes cursorBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+    .form-heading-sub{
+      font-size:13px;
+      font-weight:500;
+      color:#94a3b8;
+      line-height:1.55;
+      max-width:420px;
+      margin:0 auto 16px;
+      opacity:0;
+      transform:translateY(8px);
+      transition:opacity .55s ease, transform .55s ease;
+    }
+    .form-heading-sub.is-visible{opacity:1;transform:translateY(0);}
+
+    .form-heading-rule{
+      height:3px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      max-width:280px;
+      margin:0 auto;
+      overflow:hidden;
+      position:relative;
+    }
+    .form-heading-rule-accent{
+      display:block;
+      height:100%;
+      width:100%;
+      transform-origin:left center;
+      transform:scaleX(0);
+      background:linear-gradient(90deg,#38bdf8,#818cf8,#fbbf24,#c084fc);
+      background-size:200% 100%;
+      border-radius:999px;
+    }
+    .form-heading.is-ready .form-heading-rule-accent{
+      animation: ruleGrow .9s cubic-bezier(.22,1,.36,1) forwards, ruleGlow 3s ease-in-out infinite .9s;
+    }
+    @keyframes ruleGrow{to{transform:scaleX(1);}}
+    @keyframes ruleGlow{
+      0%,100%{background-position:0% 50%;filter:brightness(1);}
+      50%{background-position:100% 50%;filter:brightness(1.15);}
+    }
+    @keyframes badgeIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+
+    .input-box{position:relative;margin-bottom:18px;}
+    .input-box input,
+    .input-box textarea,
+    .input-box select{
+      width:100%;
+      padding:12px 40px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.12);
+      color:white;
+      transition:border-color .2s, box-shadow .2s;
+    }
+    .input-box textarea{min-height:110px;resize:vertical;}
+    .input-box input:focus,
+    .input-box textarea:focus,
+    .input-box select:focus{
+      outline:none;
+      border-color:rgba(56,189,248,.45);
+      box-shadow:0 0 0 3px rgba(56,189,248,.15);
+    }
+    .input-box select option{color:#0f172a;}
+    .input-box label{
+      position:absolute;
+      top:12px;
+      left:40px;
+      color:#cbd5e1;
+      transition:0.3s;
+      pointer-events:none;
+    }
+    .input-box input:focus~label,
+    .input-box input:not(:placeholder-shown)~label,
+    .input-box textarea:focus~label,
+    .input-box textarea:not(:placeholder-shown)~label,
+    .input-box select:focus~label,
+    .input-box select:valid~label{
+      top:-8px;
+      font-size:11px;
+      color:#67e8f9;
+    }
+    .input-box i{
+      position:absolute;
+      top:12px;
+      left:12px;
+      color:#38bdf8;
+    }
+
+    .row{display:flex;gap:10px;flex-wrap:wrap;}
+    .row .input-box{flex:1;min-width:calc(50% - 5px);}
+    @media (max-width:520px){
+      .row{flex-direction:column;}
+      .row .input-box{min-width:100%;}
+    }
+
+    button[type="submit"], .button{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      color:#fff;
+      font-weight:600;
+      font-size:15px;
+      cursor:pointer;
+      background:linear-gradient(92deg,#2563eb,#7c3aed,#0891b2);
+      background-size:200% auto;
+      box-shadow:0 10px 32px rgba(37,99,235,.35);
+      transition:transform .2s, box-shadow .2s, background-position .4s;
+    }
+    button[type="submit"]:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 40px rgba(124,58,237,.4);
+      background-position:right center;
+    }
+
+    .toast{
+      position:fixed;
+      bottom:25px;
+      right:25px;
+      padding:12px 18px;
+      border-radius:12px;
+      color:white;
+      font-weight:600;
+      z-index:999;
+      display:none;
+      background:rgba(37,99,235,.9);
+      box-shadow:0 16px 45px rgba(2,6,23,.45);
+      backdrop-filter: blur(10px);
+      max-width:min(420px, calc(100vw - 40px));
+    }
+
+    .card-appear{animation:cardIn .65s ease forwards;}
+    @keyframes cardIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  </style>
+</head>
+
+<body>
+  <div class="bg-blob blob-1" aria-hidden="true"></div>
+  <div class="bg-blob blob-2" aria-hidden="true"></div>
+  <div class="bg-blob blob-3" aria-hidden="true"></div>
+
+  <div class="card" id="mainCard">
+    <header class="form-heading" id="formHeading">
+      <span class="form-heading-badge"><i class="fas fa-building" aria-hidden="true"></i> Company Login</span>
+      <h2 class="form-heading-title" id="formTitle">
+        <span class="form-heading-shimmer" aria-hidden="true"></span>
+        <span class="form-heading-text" id="formTitleText"></span><span class="form-heading-cursor" id="formTitleCursor"></span>
+      </h2>
+      <p class="form-heading-sub" id="formTitleSub">Enter your company details to continue.</p>
+      <div class="form-heading-rule" aria-hidden="true"><span class="form-heading-rule-accent"></span></div>
+    </header>
+
+    <form id="companyLoginForm" autocomplete="off">
+      <div class="input-box">
+        <i class="fas fa-building"></i>
+        <input type="text" id="companyName" required placeholder=" ">
+        <label>Company Name</label>
+      </div>
+
+      <div class="row">
+        <div class="input-box">
+          <i class="fas fa-sitemap"></i>
+          <input type="text" id="department" required placeholder=" ">
+          <label>Department</label>
+        </div>
+        <div class="input-box">
+          <i class="fas fa-user-tie"></i>
+          <input type="text" id="designation" required placeholder=" ">
+          <label>Designation</label>
+        </div>
+      </div>
+
+      <div class="input-box">
+        <i class="fas fa-id-badge"></i>
+        <input type="text" id="companyCode" required placeholder=" ">
+        <label>Company Code</label>
+      </div>
+
+      <button type="submit" class="button">Continue</button>
+    </form>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const mainCard = document.getElementById("mainCard");
+    const formTitleText = document.getElementById("formTitleText");
+    const cursor = document.getElementById("formTitleCursor");
+    const titleBlock = document.getElementById("formTitle");
+    const sub = document.getElementById("formTitleSub");
+    const wrap = document.getElementById("formHeading");
+    const toast = document.getElementById("toast");
+    const DEFAULT_COMPANY_PROFILE = {
+      companyName: "TechSync",
+      department: "FullStack Department",
+      designation: "Ekta Sharma",
+      companyCode: "Ekta@1234"
+    };
+    const AUTHORIZED_PROFILES = [
+      {
+        companyName: "TechSync",
+        department: "FullStack Department",
+        designation: "Ekta Sharma",
+        companyCode: "Ekta@1234"
+      },
+      {
+        companyName: "TechSync",
+        department: "AI Department",
+        designation: "Mrtyunjay",
+        companyCode: "Mrtyunjay@1234"
+      }
+    ];
+ 
+
+    function showToast(message, color){
+      toast.textContent = message;
+      toast.style.background = color || "rgba(37,99,235,.9)";
+      toast.style.display = "block";
+      window.clearTimeout(showToast._t);
+      showToast._t = window.setTimeout(() => toast.style.display = "none", 2600);
+    }
+
+    function startSparkles(){
+      setInterval(()=>{
+        const dot = document.createElement("span");
+        dot.className = "sparkle";
+        dot.style.left = Math.random() * window.innerWidth + "px";
+        dot.style.top = Math.random() * window.innerHeight + "px";
+        document.body.appendChild(dot);
+        setTimeout(()=> dot.remove(), 11000);
+      }, 420);
+    }
+
+    function typeTitle(){
+      const text = "Company Login";
+      let i = 0;
+      formTitleText.textContent = "";
+      cursor.classList.remove("cursor-off");
+      titleBlock.classList.remove("title-ready");
+      wrap.classList.remove("is-ready");
+      sub.classList.remove("is-visible");
+
+      const step = ()=>{
+        formTitleText.textContent += text.charAt(i);
+        i++;
+        if(i < text.length){
+          setTimeout(step, 42 + Math.random() * 28);
+        } else {
+          cursor.classList.add("cursor-off");
+          titleBlock.classList.add("title-ready");
+          wrap.classList.add("is-ready");
+          requestAnimationFrame(()=> sub.classList.add("is-visible"));
+        }
+      };
+      setTimeout(step, 260);
+    }
+
+    function cardTilt(){
+      mainCard.addEventListener("mousemove", e=>{
+        const r = mainCard.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const rx = ((y / r.height) - 0.5) * -4;
+        const ry = ((x / r.width) - 0.5) * 5;
+        mainCard.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      mainCard.addEventListener("mouseleave", ()=>{
+        mainCard.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+      });
+    }
+
+    function loadExisting(){
+      try {
+        let saved = JSON.parse(localStorage.getItem("companyProfile"));
+        if(!saved){
+          // First load: keep default company credentials pre-filled.
+          saved = { ...DEFAULT_COMPANY_PROFILE };
+          localStorage.setItem("companyProfile", JSON.stringify(saved));
+        }
+        if(saved.companyName) document.getElementById("companyName").value = saved.companyName;
+        if(saved.department) document.getElementById("department").value = saved.department;
+        if(saved.designation) document.getElementById("designation").value = saved.designation;
+        if(saved.companyCode) document.getElementById("companyCode").value = saved.companyCode;
+      } catch { /* ignore */ }
+    }
+
+    document.getElementById("companyLoginForm").addEventListener("submit", (e)=>{
+      e.preventDefault();
+      const companyProfile = {
+        companyName: document.getElementById("companyName").value.trim(),
+        department: document.getElementById("department").value.trim(),
+        designation: document.getElementById("designation").value.trim(),
+        companyCode: document.getElementById("companyCode").value.trim(),
+        savedAt: new Date().toISOString()
+      };
+
+      if(!companyProfile.companyName || !companyProfile.department || !companyProfile.designation || !companyProfile.companyCode){
+        showToast("Please fill all fields.", "#ef4444");
+        return;
+      }
+
+      const isMatch = AUTHORIZED_PROFILES.some((p) =>
+        companyProfile.companyName.toLowerCase() === p.companyName.toLowerCase() &&
+        companyProfile.department.toLowerCase() === p.department.toLowerCase() &&
+        companyProfile.designation.toLowerCase() === p.designation.toLowerCase() &&
+        companyProfile.companyCode === p.companyCode
+      );
+
+      if(!isMatch){
+        showToast("Invalid company details. Please check and try again.", "#ef4444");
+        return;
+      }
+
+      localStorage.setItem("companyProfile", JSON.stringify(companyProfile));
+      localStorage.setItem("companyLoggedIn", "true");
+      showToast("Login successful. Redirecting…", "#22c55e");
+      setTimeout(()=>{ window.location.href = "jobposting.html"; }, 650);
+    });
+
+    mainCard.classList.add("card-appear");
+    typeTitle();
+    startSparkles();
+    cardTilt();
+    loadExisting();
+  </script>
+</body>
+</html>
